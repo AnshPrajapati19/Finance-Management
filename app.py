@@ -1,7 +1,6 @@
 from flask import Flask, render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, login_user, UserMixin, current_user
-import pyttsx3, time
 
 app = Flask(__name__)
 db = SQLAlchemy()
@@ -69,17 +68,6 @@ def get_sum_of_expense(category, user):
 
     return sum
 
-engine = pyttsx3.init('sapi5')
-voices = engine.getProperty('voices')
-engine.setProperty('voices', voices[0].id)
-
-def speak(audio):
-    # time.sleep(7)
-    engine.say(audio)
-    engine.runAndWait()
-    engine.endLoop()
-    engine.stop()
-    
 
 @app.route('/', methods=['GET', 'POST'])
 def login_page():
@@ -88,7 +76,6 @@ def login_page():
         attempted_user = User.query.filter_by(username=request.form.get("username")).first()
         password = request.form.get('password')
         real_pass = attempted_user.password
-        speak("Logged in to the Website")
          
         if attempted_user and password==real_pass:
             login_user(attempted_user)
