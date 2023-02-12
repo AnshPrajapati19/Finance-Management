@@ -192,11 +192,12 @@ def portfolio_page():
         db.session.commit()
         
     list = UserInvest.query.filter_by(user=current_user.username).all()
-    mf = list[len(list)-1].mf
-    fd = list[len(list)-1].fd
-    stock = list[len(list)-1].stock
-    bonds = list[len(list)-1].bonds
-    cash = list[len(list)-1].cash
+    if len(list)!=0:
+        mf = list[len(list)-1].mf
+        fd = list[len(list)-1].fd
+        stock = list[len(list)-1].stock
+        bonds = list[len(list)-1].bonds
+        cash = list[len(list)-1].cash
 
     return render_template('portfolio.html', total_invest=total_invest, mf=mf, fd=fd, stock=stock, cash=cash, bonds=bonds)
 
