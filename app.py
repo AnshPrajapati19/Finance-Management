@@ -259,7 +259,10 @@ def wallet_dashboard():
     
     return render_template('wallet_dashboard.html', sum=sum, list_of_user=list_of_user, who_to_pay=who_to_pay)
 
-
 @app.route('/pay')
 def pay_page():
     return render_template('pay_page.html')
+
+if __name__== '__main__':
+    app.run(debug=False, host='0.0.0.0')
+
